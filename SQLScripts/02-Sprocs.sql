@@ -69,20 +69,20 @@ END
 GO
 
 
-CREATE PROC dbo.Question_AddForLoadTest
-AS
-BEGIN
-	DECLARE @i int = 1
+--CREATE PROC dbo.Question_AddForLoadTest
+--AS
+--BEGIN
+--	DECLARE @i int = 1
 
-	WHILE @i < 10000
-	BEGIN
-		INSERT INTO dbo.Question
-			(Title, Content, UserId, UserName, Created)
-		VALUES('Question ' + CAST(@i AS nvarchar(5)), 'Content ' + CAST(@i AS nvarchar(5)), 'User1', 'User1', GETUTCDATE())
-		SET @i = @i + 1
-	END
-END
-GO
+--	WHILE @i < 10000
+--	BEGIN
+--		INSERT INTO dbo.Question
+--			(Title, Content, UserId, UserName, Created)
+--		VALUES('Question ' + CAST(@i AS nvarchar(5)), 'Content ' + CAST(@i AS nvarchar(5)), 'User1', 'User1', GETUTCDATE())
+--		SET @i = @i + 1
+--	END
+--END
+--GO
 
 CREATE PROC dbo.Question_Delete
 	(

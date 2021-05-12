@@ -23,14 +23,15 @@ namespace backend.Controllers
         private readonly IHttpClientFactory _clientFactory;
         private readonly string _auth0UserInfo;
 
-        public QuestionsController(IDataRepository dataRepository, IQuestionCache questionCache, IHttpClientFactory clientFactory, IConfiguration configuration )
+        public QuestionsController(IDataRepository dataRepository, IQuestionCache questionCache, IHttpClientFactory clientFactory, IConfiguration configuration)
         {
             _dataRepository = dataRepository;
             _cache = questionCache;
             _clientFactory = clientFactory;
-            _auth0UserInfo = $"{configuration["Auth0: Authority"]}userinfo";
+            _auth0UserInfo = $"{configuration["Auth0:Authority"]}userinfo";
         }
 
+       
         [HttpGet]
         public async Task<IEnumerable<QuestionGetManyResponse>> GetQuestions(string search, bool includeAnswers, int page = 1, int pageSize = 20)
         {
@@ -51,6 +52,7 @@ namespace backend.Controllers
             }
         }
 
+      
         [HttpGet("unanswered")]
         public async Task<IEnumerable<QuestionGetManyResponse>> GetUnansweredQuestions()
         {
@@ -134,8 +136,8 @@ namespace backend.Controllers
             {
                 QuestionId = answerPostRequest.QuestionId.Value,
                 Content = answerPostRequest.Content,
-                UserName = await GetUserName(),
                 UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value,
+                UserName = await GetUserName(),
                 Created = DateTime.UtcNow
             });
 
